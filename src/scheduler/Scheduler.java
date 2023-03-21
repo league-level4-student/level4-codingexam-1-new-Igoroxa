@@ -26,6 +26,9 @@ package scheduler;
 public class Scheduler {
 
     public static void main(String[] args) {
-
+DaysOfTheWeek[] days = DaysOfTheWeek.values();
+for (int i = 0; i < days.length; i++) {
+	
+}
     }
 }
