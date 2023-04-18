@@ -1,5 +1,9 @@
 package scheduler;
 
+import java.time.LocalTime;
+import java.time.MonthDay;
+import java.util.Scanner;
+
 /*
  * Objective: Create a weekly scheduling application.
  * 
@@ -25,10 +29,70 @@ package scheduler;
  */
 public class Scheduler {
 
-    public static void main(String[] args) {
-DaysOfTheWeek[] days = DaysOfTheWeek.values();
-for (int i = 0; i < days.length; i++) {
-	
-}
-    }
+	public static void main(String[] args) {
+		LinkedList<event> list;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Which day do you want to choose?");
+		String inputtedday = scan.nextLine();
+
+		switch (inputtedday) {
+		case ("monday"): {
+			list = DaysOfTheWeek.MONDAY.getList();
+		}
+			break;
+		case ("tuesday"): {
+			list = DaysOfTheWeek.TUESDAY.getList();
+		}
+			break;
+		case ("wednesday"): {
+			list = DaysOfTheWeek.WEDNESDAY.getList();
+		}
+			break;
+		case ("thursday"): {
+			list = DaysOfTheWeek.THURSDAY.getList();
+		}
+			break;
+		case ("friday"): {
+			list = DaysOfTheWeek.FRIDAY.getList();
+		}
+			break;
+		case ("saturday"): {
+			list = DaysOfTheWeek.SATURDAY.getList();
+		}
+			break;
+		case ("sunday"): {
+			list = DaysOfTheWeek.SUNDAY.getList();
+		}
+			break;
+		default: {
+			list = null;
+		}
+		}
+
+		System.out.println("Which action do you want to perform?");
+		String action = scan.nextLine();
+
+		switch (action) {
+		case ("add"): {
+		
+			System.out.println("State the event name");
+			String desc = scan.nextLine();
+			System.out.println("State the event time");
+			String time = scan.nextLine();
+			event even = new event(desc, time);
+			list.add(even);
+			
+		}
+			break;
+
+		case ("remove"): {
+
+		}
+
+		case ("view"): {
+
+		}
+		}
+
+	}
 }

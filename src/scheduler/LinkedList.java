@@ -46,6 +46,7 @@ public class LinkedList<T> {
 
             while (positionCounter < position) {
 
+            	
                 prev = prev.getNext();
                 next = next.getNext();
                 positionCounter++;
