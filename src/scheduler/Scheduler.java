@@ -28,71 +28,118 @@ import java.util.Scanner;
  *   variables.
  */
 public class Scheduler {
+	static LinkedList<event> list;
 
 	public static void main(String[] args) {
-		LinkedList<event> list;
+		list = null;
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Which day do you want to choose?");
-		String inputtedday = scan.nextLine();
+		boolean isRunning = true;
+		boolean actionState = true;
+		while (isRunning == true) {
+			System.out.println("Which day do you want to choose?");
+			String inputtedday = scan.nextLine();
 
-		switch (inputtedday) {
-		case ("monday"): {
-			list = DaysOfTheWeek.MONDAY.getList();
-		}
-			break;
-		case ("tuesday"): {
-			list = DaysOfTheWeek.TUESDAY.getList();
-		}
-			break;
-		case ("wednesday"): {
-			list = DaysOfTheWeek.WEDNESDAY.getList();
-		}
-			break;
-		case ("thursday"): {
-			list = DaysOfTheWeek.THURSDAY.getList();
-		}
-			break;
-		case ("friday"): {
-			list = DaysOfTheWeek.FRIDAY.getList();
-		}
-			break;
-		case ("saturday"): {
-			list = DaysOfTheWeek.SATURDAY.getList();
-		}
-			break;
-		case ("sunday"): {
-			list = DaysOfTheWeek.SUNDAY.getList();
-		}
-			break;
-		default: {
-			list = null;
-		}
+			switch (inputtedday) {
+			case ("monday"): {
+				list = DaysOfTheWeek.MONDAY.getList();
+			}
+				break;
+			case ("tuesday"): {
+				list = DaysOfTheWeek.TUESDAY.getList();
+			}
+				break;
+			case ("wednesday"): {
+				list = DaysOfTheWeek.WEDNESDAY.getList();
+			}
+				break;
+			case ("thursday"): {
+				list = DaysOfTheWeek.THURSDAY.getList();
+			}
+				break;
+			case ("friday"): {
+				list = DaysOfTheWeek.FRIDAY.getList();
+			}
+				break;
+			case ("saturday"): {
+				list = DaysOfTheWeek.SATURDAY.getList();
+			}
+				break;
+			case ("sunday"): {
+				list = DaysOfTheWeek.SUNDAY.getList();
+			}
+				break;
+
+			}
+
+			System.out.println("Which action do you want to perform?");
+			String action = scan.nextLine();
+
+			switch (action) {
+			case ("add"): {
+
+				System.out.println("State the event name");
+				String desc = scan.nextLine();
+				System.out.println("State the event time");
+				String time = scan.nextLine();
+				int Time = Integer.parseInt(time);
+				try {
+					testTime(Time);
+				} catch (NegativeNumberException e) {
+					e.popUp();
+				}
+				event even = new event(desc, time);
+				even.setDescription(desc);
+				even.setTime(time);
+				list.add(even);
+				System.out.println("Would you wish to continue?");
+				String resp = scan.nextLine();
+				if (resp.equalsIgnoreCase("no")) {
+					isRunning = false;
+					break;
+				}
+				break;
+
+			}
+
+			case ("remove"): {
+				System.out.println("Which event in the day do you wish to remove?");
+				String numb = scan.nextLine();
+				int number = Integer.parseInt(numb);
+				list.remove(number - 1);
+				break;
+			}
+
+			case ("view"): {
+				Node<event> evenNode = list.getHead();
+
+				System.out.println(evenNode.getValue().getDescription() + " at " + evenNode.getValue().getTime());
+
+				for (int i = 0; i < list.size() - 1; i++) {
+					evenNode = evenNode.getNext();
+					System.out.println(evenNode.getValue().getDescription() + " at " + evenNode.getValue().getTime());
+				}
+			}
+
+			}
+
 		}
 
-		System.out.println("Which action do you want to perform?");
-		String action = scan.nextLine();
+	}
 
-		switch (action) {
-		case ("add"): {
-		
-			System.out.println("State the event name");
-			String desc = scan.nextLine();
-			System.out.println("State the event time");
-			String time = scan.nextLine();
-			event even = new event(desc, time);
-			list.add(even);
-			
+	public static void testTime(int Time) throws NegativeNumberException {
+		System.out.println("exception works");
+		if (list.size() > 1) {
+			Node<event> ExNode = list.getHead();
+			for (int i = 0; i < list.size() - 1; i++) {
+				if (ExNode.getValue().getTime().equals(Time)) {
+					
+					System.out.println("exception is thrown");
+					throw new NegativeNumberException();
+					
+				}
+				ExNode = ExNode.getNext();
+				
+			}
 		}
-			break;
-
-		case ("remove"): {
-
-		}
-
-		case ("view"): {
-
-		}
-		}
-
 	}
 }
