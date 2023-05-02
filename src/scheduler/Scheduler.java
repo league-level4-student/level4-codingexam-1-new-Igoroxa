@@ -81,10 +81,9 @@ public class Scheduler {
 				String desc = scan.nextLine();
 				System.out.println("State the event time");
 				String time = scan.nextLine();
-				int Time = Integer.parseInt(time);
 				try {
-					testTime(Time);
-				} catch (NegativeNumberException e) {
+					testTime(time);
+				} catch (SchedulingConflictException e) {
 					e.popUp();
 				}
 				event even = new event(desc, time);
@@ -119,27 +118,28 @@ public class Scheduler {
 					System.out.println(evenNode.getValue().getDescription() + " at " + evenNode.getValue().getTime());
 				}
 			}
-
 			}
-
 		}
-
 	}
 
-	public static void testTime(int Time) throws NegativeNumberException {
+	public static void testTime(String Time) throws SchedulingConflictException {
 		System.out.println("exception works");
-		if (list.size() > 1) {
+		System.out.println(list.size());
+		if (list.size() > 0) {
+			System.out.println("passed through first");
 			Node<event> ExNode = list.getHead();
-			for (int i = 0; i < list.size() - 1; i++) {
+			do {
+				System.out.println(ExNode.getValue().getTime());
 				if (ExNode.getValue().getTime().equals(Time)) {
-					
+
 					System.out.println("exception is thrown");
-					throw new NegativeNumberException();
-					
+					throw new SchedulingConflictException();
+
 				}
 				ExNode = ExNode.getNext();
-				
-			}
+
+			} while (ExNode != null);
+
 		}
 	}
 }

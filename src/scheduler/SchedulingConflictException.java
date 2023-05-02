@@ -1,6 +1,6 @@
 package scheduler;
 
-public class NegativeNumberException extends Exception {
+public class SchedulingConflictException extends Exception {
 	void popUp() {
 		System.out.println("Error! Times for events overlap eachother.");
 	}
