@@ -123,16 +123,15 @@ public class Scheduler {
 	}
 
 	public static void testTime(String Time) throws SchedulingConflictException {
-		System.out.println("exception works");
-		System.out.println(list.size());
+		
 		if (list.size() > 0) {
-			System.out.println("passed through first");
+			
 			Node<event> ExNode = list.getHead();
 			do {
 				System.out.println(ExNode.getValue().getTime());
 				if (ExNode.getValue().getTime().equals(Time)) {
 
-					System.out.println("exception is thrown");
+					
 					throw new SchedulingConflictException();
 
 				}
